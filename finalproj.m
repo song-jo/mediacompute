@@ -70,7 +70,7 @@ for i=1:nheights
     end
 end
 
-huffencoded
+
 
 
 
