@@ -1,7 +1,20 @@
-function [outputArg1,outputArg2] = untitled2(inputArg1,inputArg2)
+function decoding = rleinv(encoding)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+decoding = [];
+zero = 0;
+for i=1:size(encoding, 2)
+    if encoding(i) == 0
+        zero=1;
+    else
+        if zero==1
+            decoding = [decoding zeros(1,encoding(i))];
+            zero = 0;
+        else
+            decoding = [decoding encoding(i)];
+        end
+    end
+end
+decoding = reshape(decoding, 8, 8).';
 end
 

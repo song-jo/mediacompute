@@ -43,21 +43,34 @@ end
 
 imshow(freqMatrix(:, :, 1))
 
-%Run length encoding of 0's
+%Run length encoding of 0's and huffman encoding
 rlencoded = {};
+longarray = [];
 for i=1:nheights
     for j=1:nwidths
         for k =1:3
             rlencoded{i,j,k} = rle(freqCells{i,j,k});
+            longarray = [longarray rlencoded{i,j,k}];
+        end
+    end
+end
+%%Huffman sketchy and slow
+symbols = unique(longarray);
+p = histcounts(longarray, length(symbols))/length(longarray);
+
+dict = huffmandict(symbols, p);
+
+huffencoded = {};
+
+for i=1:nheights
+    for j=1:nwidths
+        for k =1:3
+            huffencoded{i,j,k} = huffmanenco(rlencoded{i,j,k}, dict);
         end
     end
 end
 
+huffencoded
 
-
-%symbols = unique(b);
-%#prob = histcounts(b,length(symbols))/length(b);
-%dict = huffmandict(symbols, prob);
-%enco = huffmanenco(b, dict);
 
 
