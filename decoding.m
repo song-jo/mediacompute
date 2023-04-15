@@ -28,5 +28,6 @@ for i=1:nheights
 end
 
 %Show compressed Image 
-imshow(uint8(finalresult))
+
+imshow(ycbcr2rgb(uint8(finalresult)))
 
